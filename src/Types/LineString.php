@@ -15,7 +15,7 @@ class LineString extends PointCollection
      */
     protected $minimumCollectionItems = 2;
 
-    public function toWKT()
+    public function toWKT(): string
     {
         return sprintf('LINESTRING(%s)', $this->toPairList());
     }
@@ -63,9 +63,9 @@ class LineString extends PointCollection
     /**
      * Convert to GeoJson LineString that is jsonable to GeoJSON.
      *
-     * @return \GeoJson\Geometry\LineString
+     * @return array|\GeoJson\Geometry\LineString
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $points = [];
         foreach ($this->items as $point) {

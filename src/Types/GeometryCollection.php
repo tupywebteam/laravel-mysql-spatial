@@ -47,7 +47,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
         $this->items = $geometries;
     }
 
-    public function getGeometries()
+    public function getGeometries(): array
     {
         return $this->items;
     }
@@ -79,17 +79,17 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
         }, $geometry_strings));
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return $this->items;
     }
 
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->items);
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->items[$offset]);
     }
@@ -115,7 +115,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
         unset($this->items[$offset]);
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }
@@ -141,9 +141,9 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
     /**
      * Convert to GeoJson GeometryCollection that is jsonable to GeoJSON.
      *
-     * @return \GeoJson\Geometry\GeometryCollection
+     * @return array|\GeoJson\Geometry\GeometryCollection
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $geometries = [];
         foreach ($this->items as $geometry) {
@@ -158,7 +158,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
      *
      * @param array $items
      */
-    protected function validateItems(array $items)
+    protected function validateItems(array $items): void
     {
         $this->validateItemCount($items);
 
@@ -174,7 +174,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
      *
      * @see $minimumCollectionItems
      */
-    protected function validateItemCount(array $items)
+    protected function validateItemCount(array $items): void
     {
         if (count($items) < $this->minimumCollectionItems) {
             $entries = $this->minimumCollectionItems === 1 ? 'entry' : 'entries';
@@ -195,7 +195,7 @@ class GeometryCollection extends Geometry implements IteratorAggregate, ArrayAcc
      *
      * @see $collectionItemType
      */
-    protected function validateItemType($item)
+    protected function validateItemType($item): void
     {
         if (!$item instanceof $this->collectionItemType) {
             throw new InvalidArgumentException(sprintf(

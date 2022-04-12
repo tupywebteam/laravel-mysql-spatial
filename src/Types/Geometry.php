@@ -27,7 +27,7 @@ abstract class Geometry implements GeometryInterface, Jsonable, \JsonSerializabl
         return substr($value, $left + 1, $right - $left - 1);
     }
 
-    public static function getWKTClass($value)
+    public static function getWKTClass($value): string
     {
         $left = strpos($value, '(');
         $type = trim(substr($value, 0, $left));

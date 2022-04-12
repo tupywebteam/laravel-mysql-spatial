@@ -14,7 +14,7 @@ abstract class PointCollection extends GeometryCollection
      */
     protected $collectionItemType = Point::class;
 
-    public function toPairList()
+    public function toPairList(): string
     {
         return implode(',', array_map(function (Point $point) {
             return $point->toPair();
@@ -31,7 +31,7 @@ abstract class PointCollection extends GeometryCollection
     /**
      * @return array|\Grimzy\LaravelMysqlSpatial\Types\Point[]
      */
-    public function getPoints()
+    public function getPoints(): array
     {
         return $this->items;
     }
