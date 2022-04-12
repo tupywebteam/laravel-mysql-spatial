@@ -42,7 +42,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.0.x-dev"
+            "dev-master": "5.0.x-dev",
+            "dev-mysql-8": "6.0.x-dev"
         },
         "laravel": {
             "providers": [
