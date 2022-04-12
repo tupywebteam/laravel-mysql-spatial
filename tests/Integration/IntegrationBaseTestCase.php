@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Contracts\Console\Kernel;
 use Grimzy\LaravelMysqlSpatial\SpatialServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
@@ -19,7 +20,7 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
         $app = require __DIR__.'/../../vendor/laravel/laravel/bootstrap/app.php';
         $app->register(SpatialServiceProvider::class);
 
-        $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
+        $app->make(Kernel::class)->bootstrap();
 
         $app['config']->set('database.default', 'mysql');
         $app['config']->set('database.connections.mysql.host', env('DB_HOST'));
@@ -44,7 +45,7 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -59,7 +60,7 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
         //});
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->onMigrations(function ($migrationClass) {
             (new $migrationClass())->down();

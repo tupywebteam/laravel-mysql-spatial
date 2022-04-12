@@ -9,7 +9,7 @@ class BaseBuilder extends QueryBuilder
     public function cleanBindings(array $bindings)
     {
         $spatialBindings = [];
-        foreach ($bindings as &$binding) {
+        foreach ($bindings as $binding) {
             if ($binding instanceof SpatialExpression) {
                 $spatialBindings[] = $binding->getSpatialValue();
                 $spatialBindings[] = $binding->getSrid();

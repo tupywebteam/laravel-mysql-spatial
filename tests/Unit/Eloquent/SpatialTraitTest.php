@@ -21,13 +21,13 @@ class SpatialTraitTest extends BaseTestCase
      */
     protected $queries;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->model = new TestModel();
         $this->queries = &$this->model->getConnection()->getPdo()->queries;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->model->getConnection()->getPdo()->resetQueries();
     }
@@ -580,9 +580,9 @@ class TestPDO extends PDO
 
     public $counter = 1;
 
-    public function prepare($statement, $driver_options = [])
+    public function prepare(string $query, array $options = []): PDOStatement|false
     {
-        $this->queries[] = $statement;
+        $this->queries[] = $query;
 
         $stmt = m::mock('PDOStatement');
         $stmt->shouldReceive('bindValue')->zeroOrMoreTimes();
@@ -593,7 +593,11 @@ class TestPDO extends PDO
         return $stmt;
     }
 
-    public function lastInsertId($name = null)
+    /**
+     * @param string|null $name
+     * @return string|false
+     */
+    public function lastInsertId(?string $name = null): string|false
     {
         return $this->counter++;
     }

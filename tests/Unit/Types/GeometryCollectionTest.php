@@ -71,7 +71,7 @@ class GeometryCollectionTest extends BaseTestCase
     {
         $geometryCollection = $this->getGeometryCollection();
 
-        $this->assertInternalType('array', $geometryCollection->toArray());
+        $this->assertIsArray( $geometryCollection->toArray());
     }
 
     public function testIteratorAggregate()
@@ -136,7 +136,7 @@ class GeometryCollectionTest extends BaseTestCase
         GeometryCollection::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
     }
 
-    private function getGeometryCollection()
+    private function getGeometryCollection(): GeometryCollection
     {
         return new GeometryCollection([$this->getLineString(), $this->getPoint()]);
     }
