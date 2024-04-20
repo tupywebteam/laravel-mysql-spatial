@@ -7,14 +7,14 @@ use Doctrine\DBAL\Types\Type;
 
 class MultiLineString extends Type
 {
-    const MULTILINESTRING = 'multilinestring';
+    public const MULTILINESTRING = 'multilinestring';
 
-    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return 'multilinestring';
     }
 
-    public function getName()
+    public function getName(): string
     {
         return self::MULTILINESTRING;
     }

@@ -1,9 +1,9 @@
 version: '3.3'
 services:
   db:
-      image: mysql:5.7
+      image: mysql:8.0.36
       ports:
-        - "3306:3306"
+        - "3309:3306"
       environment:
         MYSQL_DATABASE: 'spatial_test'
         MYSQL_ROOT_PASSWORD: ''

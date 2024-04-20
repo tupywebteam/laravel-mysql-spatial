@@ -5,3 +5,5 @@ _db/
 build/
 _db*
 .phpunit.result.cache
+
+.phpunit.cache

@@ -1,9 +1,11 @@
 <?php
 
+namespace Tests\Unit;
+
 use Grimzy\LaravelMysqlSpatial\MysqlConnection;
 use Grimzy\LaravelMysqlSpatial\Schema\Builder;
 use PHPUnit\Framework\TestCase;
-use Stubs\PDOStub;
+use Tests\Unit\Stubs\PDOStub;
 
 class MysqlConnectionTest extends TestCase
 {
@@ -11,9 +13,24 @@ class MysqlConnectionTest extends TestCase
 
     protected function setUp(): void
     {
-        $mysqlConfig = ['driver' => 'mysql', 'prefix' => 'prefix', 'database' => 'database', 'name' => 'spatial_test', 'port' => 3309];
+        $mysqlConfig = [
+            'driver' => 'mysql',
+            'prefix' => 'prefix',
+            'database' => 'database',
+            'name' => 'spatial_test',
+            'port' => 3309
+        ];
 
-        $this->mysqlConnection = new MysqlConnection(new PDOStub(options: $mysqlConfig), 'database', 'prefix', $mysqlConfig);
+        $this->mysqlConnection = new MysqlConnection(
+            new PDOStub(
+                options: $mysqlConfig
+            ),
+            'database',
+            'prefix',
+            $mysqlConfig
+        );
+
+        parent::setUp();
     }
 
     public function testGetSchemaBuilder()

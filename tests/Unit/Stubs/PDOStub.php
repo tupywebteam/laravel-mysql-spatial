@@ -1,6 +1,6 @@
 <?php
 
-namespace Stubs;
+namespace Tests\Unit\Stubs;
 
 class PDOStub extends \PDO
 {

@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Types;
+
 use Grimzy\LaravelMysqlSpatial\Exceptions\UnknownWKTTypeException;
 use Grimzy\LaravelMysqlSpatial\Types\Geometry;
 use Grimzy\LaravelMysqlSpatial\Types\GeometryCollection;
@@ -9,6 +11,7 @@ use Grimzy\LaravelMysqlSpatial\Types\MultiPoint;
 use Grimzy\LaravelMysqlSpatial\Types\MultiPolygon;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
+use Tests\Unit\BaseTestCase;
 
 class GeometryTest extends BaseTestCase
 {

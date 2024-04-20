@@ -1,9 +1,12 @@
 <?php
 
+namespace Tests\Unit\Types;
+
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\MultiPolygon;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
+use Tests\Unit\BaseTestCase;
 
 class MultiPolygonTest extends BaseTestCase
 {

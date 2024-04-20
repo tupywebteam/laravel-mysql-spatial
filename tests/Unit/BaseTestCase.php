@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Unit;
+
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 abstract class BaseTestCase extends TestCase

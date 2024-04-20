@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Integration;
+
 use Illuminate\Contracts\Console\Kernel;
 use Grimzy\LaravelMysqlSpatial\SpatialServiceProvider;
 use Illuminate\Support\Facades\DB;

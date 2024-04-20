@@ -1,10 +1,13 @@
 <?php
 
+namespace Tests\Unit\Schema\Grammars;
+
 use Grimzy\LaravelMysqlSpatial\MysqlConnection;
 use Grimzy\LaravelMysqlSpatial\Schema\Blueprint;
 use Grimzy\LaravelMysqlSpatial\Schema\Grammars\MySqlGrammar;
+use Tests\Unit\BaseTestCase;
 
-class MySqlGrammarBaseTest extends BaseTestCase
+class MySqlGrammarTest extends BaseTestCase
 {
     public function testAddingGeometry()
     {

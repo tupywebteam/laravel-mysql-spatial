@@ -1,8 +1,11 @@
 <?php
 
+namespace Tests\Unit\Types;
+
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\MultiLineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Tests\Unit\BaseTestCase;
 
 class MultiLineStringTest extends BaseTestCase
 {

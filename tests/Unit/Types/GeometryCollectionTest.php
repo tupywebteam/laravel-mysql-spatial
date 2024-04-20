@@ -1,10 +1,13 @@
 <?php
 
+namespace Tests\Unit\Types;
+
 use Grimzy\LaravelMysqlSpatial\Types\GeometryCollection;
 use Grimzy\LaravelMysqlSpatial\Types\GeometryInterface;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
+use Tests\Unit\BaseTestCase;
 
 class GeometryCollectionTest extends BaseTestCase
 {

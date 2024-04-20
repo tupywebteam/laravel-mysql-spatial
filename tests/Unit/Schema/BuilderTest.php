@@ -1,8 +1,8 @@
 <?php
 
-namespace Schema;
+namespace Tests\Unit\Schema\Grammars;
 
-use BaseTestCase;
+use Tests\Unit\BaseTestCase;
 use Grimzy\LaravelMysqlSpatial\MysqlConnection;
 use Grimzy\LaravelMysqlSpatial\Schema\Blueprint;
 use Grimzy\LaravelMysqlSpatial\Schema\Builder;

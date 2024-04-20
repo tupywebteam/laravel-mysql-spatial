@@ -1,8 +1,7 @@
 <?php
 
-namespace Eloquent;
+namespace Tests\Unit\Eloquent;
 
-use BaseTestCase;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialExpression;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
@@ -14,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Mockery;
+use Tests\Unit\BaseTestCase;
 
 class BuilderTest extends BaseTestCase
 {

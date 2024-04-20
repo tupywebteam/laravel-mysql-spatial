@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Integration\Models;
+
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
 

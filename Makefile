@@ -1,15 +1,15 @@
-V=5.7
+V=8.0.36
 DB_DIR=$(shell pwd)/_db-$(V)
 mV=10.3
 mDB_DIR=$(shell pwd)/_db-$(mV)
 
 start_db:
 	@echo Starting MySQL $(V)
-	docker run --rm -d --name spatial-mysql \
-            -p 3309:3306 \
-            -v $(DB_DIR):/var/lib/mysql \
-            -e MYSQL_DATABASE=spatial_test \
-            -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+	docker run --rm -t -d --name spatial-mysql \
+            --publish=3309:3306 \
+            --volume=$(DB_DIR):/var/lib/mysql \
+            --env=MYSQL_DATABASE=spatial_test \
+            --env=MYSQL_ALLOW_EMPTY_PASSWORD=yes \
             mysql:$(V) --character-set-server=utf8 --collation-server=utf8_general_ci --default-authentication-plugin=mysql_native_password
 
 start_db_maria:

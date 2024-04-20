@@ -1,11 +1,16 @@
 <?php
 
+namespace Tests\Unit\Connectors;
+
 use Grimzy\LaravelMysqlSpatial\Connectors\ConnectionFactory;
 use Grimzy\LaravelMysqlSpatial\MysqlConnection;
 use Illuminate\Container\Container;
-use Stubs\PDOStub;
+use Illuminate\Database\PostgresConnection;
+use Mockery;
+use Tests\Unit\BaseTestCase;
+use Tests\Unit\Stubs\PDOStub;
 
-class ConnectionFactoryBaseTest extends BaseTestCase
+class ConnectionFactoryTest extends BaseTestCase
 {
     public function testMakeCallsCreateConnection()
     {
@@ -26,6 +31,6 @@ class ConnectionFactoryBaseTest extends BaseTestCase
         $factory->shouldAllowMockingProtectedMethods();
         $conn = $factory->createConnection('pgsql', $pdo, 'database');
 
-        $this->assertInstanceOf(\Illuminate\Database\PostgresConnection::class, $conn);
+        $this->assertInstanceOf(PostgresConnection::class, $conn);
     }
 }
