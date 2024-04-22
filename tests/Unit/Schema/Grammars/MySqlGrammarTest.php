@@ -5,6 +5,7 @@ namespace Tests\Unit\Schema\Grammars;
 use Grimzy\LaravelMysqlSpatial\MysqlConnection;
 use Grimzy\LaravelMysqlSpatial\Schema\Blueprint;
 use Grimzy\LaravelMysqlSpatial\Schema\Grammars\MySqlGrammar;
+use Mockery;
 use Tests\Unit\BaseTestCase;
 
 class MySqlGrammarTest extends BaseTestCase
@@ -92,7 +93,7 @@ class MySqlGrammarTest extends BaseTestCase
     public function testAddingGeometryWithSrid()
     {
         $blueprint = new Blueprint('test');
-        $blueprint->geometry('foo', 4326);
+        $blueprint->geometry('foo', srid: 4326);
         $statements = $blueprint->toSql($this->getConnection(), $this->getGrammar());
 
         $this->assertEquals(1, count($statements));
@@ -102,7 +103,7 @@ class MySqlGrammarTest extends BaseTestCase
     public function testAddingPointWithSrid()
     {
         $blueprint = new Blueprint('test');
-        $blueprint->point('foo', 4326);
+        $blueprint->point('foo', srid: 4326);
         $statements = $blueprint->toSql($this->getConnection(), $this->getGrammar());
 
         $this->assertEquals(1, count($statements));
@@ -112,7 +113,7 @@ class MySqlGrammarTest extends BaseTestCase
     public function testAddingLinestringWithSrid()
     {
         $blueprint = new Blueprint('test');
-        $blueprint->linestring('foo', 4326);
+        $blueprint->linestring('foo', srid: 4326);
         $statements = $blueprint->toSql($this->getConnection(), $this->getGrammar());
 
         $this->assertEquals(1, count($statements));
@@ -122,7 +123,7 @@ class MySqlGrammarTest extends BaseTestCase
     public function testAddingPolygonWithSrid()
     {
         $blueprint = new Blueprint('test');
-        $blueprint->polygon('foo', 4326);
+        $blueprint->polygon('foo', srid: 4326);
         $statements = $blueprint->toSql($this->getConnection(), $this->getGrammar());
 
         $this->assertEquals(1, count($statements));
@@ -132,7 +133,7 @@ class MySqlGrammarTest extends BaseTestCase
     public function testAddingMultipointWithSrid()
     {
         $blueprint = new Blueprint('test');
-        $blueprint->multipoint('foo', 4326);
+        $blueprint->multipoint('foo', srid: 4326);
         $statements = $blueprint->toSql($this->getConnection(), $this->getGrammar());
 
         $this->assertEquals(1, count($statements));
@@ -142,7 +143,7 @@ class MySqlGrammarTest extends BaseTestCase
     public function testAddingMultiLinestringWithSrid()
     {
         $blueprint = new Blueprint('test');
-        $blueprint->multilinestring('foo', 4326);
+        $blueprint->multilinestring('foo', srid: 4326);
         $statements = $blueprint->toSql($this->getConnection(), $this->getGrammar());
 
         $this->assertEquals(1, count($statements));
@@ -152,7 +153,7 @@ class MySqlGrammarTest extends BaseTestCase
     public function testAddingMultiPolygonWithSrid()
     {
         $blueprint = new Blueprint('test');
-        $blueprint->multipolygon('foo', 4326);
+        $blueprint->multipolygon('foo', srid: 4326);
         $statements = $blueprint->toSql($this->getConnection(), $this->getGrammar());
 
         $this->assertEquals(1, count($statements));
@@ -162,7 +163,7 @@ class MySqlGrammarTest extends BaseTestCase
     public function testAddingGeometryCollectionWithSrid()
     {
         $blueprint = new Blueprint('test');
-        $blueprint->geometrycollection('foo', 4326);
+        $blueprint->geometrycollection('foo', srid: 4326);
         $statements = $blueprint->toSql($this->getConnection(), $this->getGrammar());
 
         $this->assertEquals(1, count($statements));
@@ -190,7 +191,7 @@ class MySqlGrammarTest extends BaseTestCase
     }
 
     /**
-     * @return Connection
+     * @return MysqlConnection
      */
     protected function getConnection()
     {

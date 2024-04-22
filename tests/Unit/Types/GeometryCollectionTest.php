@@ -2,11 +2,13 @@
 
 namespace Tests\Unit\Types;
 
+use GeoJson\Feature\FeatureCollection;
 use Grimzy\LaravelMysqlSpatial\Types\GeometryCollection;
 use Grimzy\LaravelMysqlSpatial\Types\GeometryInterface;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
+use InvalidArgumentException;
 use Tests\Unit\BaseTestCase;
 
 class GeometryCollectionTest extends BaseTestCase
@@ -134,7 +136,7 @@ class GeometryCollectionTest extends BaseTestCase
     {
         $this->assertException(
             \Grimzy\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
-            sprintf('Expected %s, got %s', GeoJson\Feature\FeatureCollection::class, GeoJson\Geometry\Point::class)
+            sprintf('Expected %s, got %s', FeatureCollection::class, \GeoJson\Geometry\Point::class)
         );
         GeometryCollection::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
     }

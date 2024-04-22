@@ -6,6 +6,7 @@ use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\MultiPolygon;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
+use InvalidArgumentException;
 use Tests\Unit\BaseTestCase;
 
 class MultiPolygonTest extends BaseTestCase
@@ -70,7 +71,7 @@ class MultiPolygonTest extends BaseTestCase
     {
         $this->assertException(
             \Grimzy\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
-            sprintf('Expected %s, got %s', GeoJson\Geometry\MultiPolygon::class, GeoJson\Geometry\Point::class)
+            sprintf('Expected %s, got %s', \GeoJson\Geometry\MultiPolygon::class, \GeoJson\Geometry\Point::class)
         );
         MultiPolygon::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
     }

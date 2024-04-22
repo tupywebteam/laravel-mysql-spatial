@@ -2,28 +2,34 @@
 
 namespace Tests\Integration;
 
+use Grimzy\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException;
 use Grimzy\LaravelMysqlSpatial\Types\GeometryCollection;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\MultiPoint;
 use Grimzy\LaravelMysqlSpatial\Types\MultiPolygon;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
+use Tests\Integration\Migrations\CreateTables;
+use Tests\Integration\Migrations\UpdateTables;
 use Tests\Integration\Models\GeometryModel;
+use Tests\Integration\Models\NoSpatialFieldsModel;
 
 class SpatialTest extends IntegrationBaseTestCase
 {
     protected $migrations = [
-        CreateLocationTable::class,
-        UpdateLocationTable::class,
+        CreateTables::class,
+        UpdateTables::class,
     ];
+
+    public int $srid = 3857;
 
     public function testSpatialFieldsNotDefinedException()
     {
         $geo = new NoSpatialFieldsModel();
-        $geo->geometry = new Point(1, 2);
+        $geo->geometry = new Point(1, 2, $this->srid);
         $geo->save();
 
-        $this->assertException(\Grimzy\LaravelMysqlSpatial\Exceptions\SpatialFieldsNotDefinedException::class);
+        $this->assertException(SpatialFieldsNotDefinedException::class);
         NoSpatialFieldsModel::all();
     }
 
@@ -205,27 +211,27 @@ class SpatialTest extends IntegrationBaseTestCase
     public function testDistanceValue()
     {
         $loc1 = new GeometryModel();
-        $loc1->location = new Point(1, 1);
+        $loc1->location = new Point(1, 1, $this->srid);
         $loc1->save();
 
         $loc2 = new GeometryModel();
-        $loc2->location = new Point(2, 2); // Distance from loc1: 1.4142135623731
+        $loc2->location = new Point(2, 2, $this->srid); // Distance from loc1: 1.4142135623731
         $loc2->save();
 
         $a = GeometryModel::distanceValue('location', $loc1->location)->get();
         $this->assertCount(2, $a);
         $this->assertEquals(0, $a[0]->distance);
-        $this->assertEquals(1.4142135623, $a[1]->distance); // PHP floats' 11th+ digits don't matter
+        $this->assertEquals(1.4142135623730951, $a[1]->distance); // PHP floats' 11th+ digits don't matter
     }
 
     public function testDistanceSphereValue()
     {
         $loc1 = new GeometryModel();
-        $loc1->location = new Point(40.767864, -73.971732);
+        $loc1->location = new Point(40.767864, -73.971732, $this->srid);
         $loc1->save();
 
         $loc2 = new GeometryModel();
-        $loc2->location = new Point(40.767664, -73.971271); // Distance from loc1: 44.741406484236
+        $loc2->location = new Point(40.767664, -73.971271, $this->srid); // Distance from loc1: 44.741406484236
         $loc2->save();
 
         $a = GeometryModel::distanceSphereValue('location', $loc1->location)->get();

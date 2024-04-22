@@ -28,13 +28,13 @@ class CreateTables extends Migration
                 $table->collation = 'utf8mb4_unicode_ci';
                 $table->increments('id');
                 $table->geometry('geo')->default(null)->nullable();
-                $table->point('location');  // required to be not null in order to add an index
-                $table->lineString('line')->default(null)->nullable();
-                $table->polygon('shape')->default(null)->nullable();
-                $table->multiPoint('multi_locations')->default(null)->nullable();
-                $table->multiLineString('multi_lines')->default(null)->nullable();
-                $table->multiPolygon('multi_shapes')->default(null)->nullable();
-                $table->geometryCollection('multi_geometries')->default(null)->nullable();
+                $table->point('location', srid: 0);  // required to be not null in order to add an index
+                $table->lineString('line', srid: 0)->default(null)->nullable();
+                $table->polygon('shape', srid: 0)->default(null)->nullable();
+                $table->multiPoint('multi_locations', srid: 0)->default(null)->nullable();
+                $table->multiLineString('multi_lines', srid: 0)->default(null)->nullable();
+                $table->multiPolygon('multi_shapes', srid: 0)->default(null)->nullable();
+                $table->geometryCollection('multi_geometries', srid: 0)->default(null)->nullable();
                 $table->timestamps();
             });
         }
@@ -42,7 +42,7 @@ class CreateTables extends Migration
         if (!$this->schema->hasTable('no_spatial_fields')) {
             $this->schema->create('no_spatial_fields', function (Blueprint $table) {
                 $table->increments('id');
-                $table->geometry('geometry')->default(null)->nullable();
+                $table->geometry('geometry', srid: 3857)->default(null)->nullable();
             });
         }
 
@@ -51,7 +51,7 @@ class CreateTables extends Migration
                 $table->charset = 'utf8mb4';
                 $table->collation = 'utf8mb4_unicode_ci';
                 $table->increments('id');
-                $table->geometry('geo', 3857)->default(null)->nullable();
+                $table->geometry('geo', srid: 3857)->default(null)->nullable();
                 $table->point('location', 3857)->default(null)->nullable();
                 $table->lineString('line', 3857)->default(null)->nullable();
                 $table->polygon('shape', 3857)->default(null)->nullable();

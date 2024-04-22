@@ -4,6 +4,7 @@ namespace Tests\Unit\Types;
 
 use Grimzy\LaravelMysqlSpatial\Types\MultiPoint;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
+use InvalidArgumentException;
 use Tests\Unit\BaseTestCase;
 
 class MultiPointTest extends BaseTestCase
@@ -47,7 +48,7 @@ class MultiPointTest extends BaseTestCase
     {
         $this->assertException(
             \Grimzy\LaravelMysqlSpatial\Exceptions\InvalidGeoJsonException::class,
-            sprintf('Expected %s, got %s', GeoJson\Geometry\MultiPoint::class, GeoJson\Geometry\Point::class)
+            sprintf('Expected %s, got %s', \GeoJson\Geometry\MultiPoint::class, \GeoJson\Geometry\Point::class)
         );
         MultiPoint::fromJson('{"type":"Point","coordinates":[3.4,1.2]}');
     }

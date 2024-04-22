@@ -3,12 +3,14 @@
 namespace Tests\Integration;
 
 use Illuminate\Support\Facades\DB;
+use Tests\Integration\Migrations\CreateTables;
+use Tests\Integration\Migrations\UpdateTables;
 
 class MigrationTest extends IntegrationBaseTestCase
 {
     protected $migrations = [
-        CreateLocationTable::class,
-        UpdateLocationTable::class,
+        CreateTables::class,
+        UpdateTables::class,
     ];
 
     public function testTableWasCreatedWithRightTypes()

@@ -2,10 +2,10 @@
 
 namespace Tests\Integration;
 
-use Illuminate\Contracts\Console\Kernel;
 use Grimzy\LaravelMysqlSpatial\SpatialServiceProvider;
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\DB;
-use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 
 abstract class IntegrationBaseTestCase extends BaseTestCase
 {
@@ -19,7 +19,7 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
      */
     public function createApplication()
     {
-        $app = require __DIR__.'/../../vendor/laravel/laravel/bootstrap/app.php';
+        $app = require __DIR__ . '/../../vendor/laravel/laravel/bootstrap/app.php';
         $app->register(SpatialServiceProvider::class);
 
         $app->make(Kernel::class)->bootstrap();
@@ -51,6 +51,22 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
     {
         parent::setUp();
 
+        config([
+            'database.default' => 'mysql',
+            'database.connections.mysql.modes' => [
+                'ONLY_FULL_GROUP_BY',
+                'STRICT_TRANS_TABLES',
+                'NO_ZERO_IN_DATE',
+                'NO_ZERO_DATE',
+                'ERROR_FOR_DIVISION_BY_ZERO',
+                'NO_ENGINE_SUBSTITUTION',
+            ],
+            'database.connections.mysql.port' => env('DB_PORT'),
+            'database.connections.mysql.database' => env('DB_DATABASE'),
+            'database.connections.mysql.username' => env('DB_USERNAME'),
+            'database.connections.mysql.password' => env('DB_PASSWORD'),
+        ]);
+
         $this->after_fix = $this->isMySQL8AfterFix();
 
         $this->onMigrations(function ($migrationClass) {
@@ -74,8 +90,7 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
     // MySQL 8.0.4 fixed bug #26941370 and bug #88031
     private function isMySQL8AfterFix()
     {
-        $results = DB::select(DB::raw('select version()'));
-        $mysql_version = $results[0]->{'version()'};
+        $mysql_version = DB::getServerVersion();
 
         return version_compare($mysql_version, '8.0.4', '>=');
     }
@@ -92,12 +107,13 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
     protected function assertException($exceptionName, $exceptionMessage = null)
     {
         if (method_exists(parent::class, 'expectException')) {
-            parent::expectException($exceptionName);
+            $this->expectException($exceptionName);
+
             if (!is_null($exceptionMessage)) {
                 $this->expectExceptionMessage($exceptionMessage);
             }
         } else {
-            $this->setExpectedException($exceptionName, $exceptionMessage);
+            throw new \RuntimeException($exceptionName . ': ' . $exceptionMessage);
         }
     }
 

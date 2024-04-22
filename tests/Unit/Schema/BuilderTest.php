@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Schema\Grammars;
+namespace Tests\Unit\Schema;
 
 use Tests\Unit\BaseTestCase;
 use Grimzy\LaravelMysqlSpatial\MysqlConnection;
