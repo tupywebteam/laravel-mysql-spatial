@@ -95,7 +95,7 @@ abstract class IntegrationBaseTestCase extends BaseTestCase
         return version_compare($mysql_version, '8.0.4', '>=');
     }
 
-    protected function assertDatabaseHas($table, array $data, $connection = null)
+    protected function assertDatabaseHas($table, array $data = [], $connection = null)
     {
         if (method_exists($this, 'seeInDatabase')) {
             $this->seeInDatabase($table, $data, $connection);
