@@ -45,7 +45,8 @@
         "branch-alias": {
             "dev-master": "5.0.x-dev",
             "dev-mysql-8": "6.0.x-dev",
-            "dev-laravel-11": "7.0.x-dev"
+            "dev-laravel-11": "7.0.x-dev",
+            "dev-laravel-12": "8.0.x-dev"
         },
         "laravel": {
             "providers": [
