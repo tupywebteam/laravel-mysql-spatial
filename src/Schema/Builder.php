@@ -3,6 +3,7 @@
 namespace Grimzy\LaravelMysqlSpatial\Schema;
 
 use Closure;
+use Illuminate\Container\Container;
 use Illuminate\Database\Schema\MySqlBuilder;
 
 class Builder extends MySqlBuilder
