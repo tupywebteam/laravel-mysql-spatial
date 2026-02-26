@@ -1,0 +1,22 @@
+{
+  "name": "Laravel MySQL Spatial (PHP 8.4)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "felixfbecker.php-debug",
+        "emallin.phpunit"
+      ]
+    }
+  },
+  "postCreateCommand": "composer install --no-interaction --prefer-dist",
+  "containerEnv": {
+    "COMPOSER_ALLOW_SUPERUSER": "1"
+  }
+}
