@@ -15,7 +15,7 @@ class MySqlGrammar extends IlluminateMySqlGrammar
     {
         try {
             parent::__construct($connection);
-        } catch {
+        } catch ($e) {
             // do nothing
         }
         
